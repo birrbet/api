@@ -8,7 +8,7 @@ services:
       dockerfile: ./Dockerfile
     environment:
       NODE_ENV: production
-      REMOTE_DATABASE_URL: mongodb://127.0.0.1:27017/birrbets
+      REMOTE_DATABASE_URL: mongodb://mongo:27017/birrbets
     env_file:
         - ./.env
     ports:
@@ -28,8 +28,8 @@ services:
         - ./rabbitmq.env
   mongo:
     container_name: mongo
-    image: mongo
+    image: mongo:latest
     volumes:
         - ./data:/data/db
     ports:
-        - '27018:27017'
+        - 27017:27017
