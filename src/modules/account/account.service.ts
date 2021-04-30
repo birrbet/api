@@ -65,4 +65,10 @@ export class AccountService {
         wallet.save();
         return wallet;
     }
+    //
+    getUserIfRefreshTokenMatches(refreshToken: string, userId: string) {
+        // hash the refresh token and compare with the hashed value stored
+        // if matched return user
+        return;
+    }
 }
