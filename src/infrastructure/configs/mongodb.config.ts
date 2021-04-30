@@ -6,6 +6,8 @@ export class MongoDbConfig implements MongooseOptionsFactory {
     createMongooseOptions(): MongooseModuleOptions | Promise<MongooseModuleOptions> {
         return {
              uri: process.env.REMOTE_DATABASE_URL,
+            // user: 'root',
+            // pass: 'rootpassword',
              useUnifiedTopology: true,
              useNewUrlParser: true,
              useCreateIndex: true,
