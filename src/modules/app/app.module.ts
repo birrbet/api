@@ -4,13 +4,15 @@ import { WinstonModule } from 'nest-winston';
 import { GraphQlApiModule } from 'src/graphql-api/graphql-api.module';
 import { MongoDbConfig } from 'src/infrastructure/configs/mongodb.config';
 import { WinstonConfig } from 'src/infrastructure/configs/winston.config';
+import { RabbitMqModule } from 'src/infrastructure/rabbit-mq/rabbit-md.module';
 @Module({
   imports: [
     MongooseModule.forRootAsync({
-      useClass: MongoDbConfig
+      useClass: MongoDbConfig,
     }),
     WinstonModule.forRootAsync({
-      useClass: WinstonConfig
+      useClass: WinstonConfig,
+      imports: [RabbitMqModule]
     }),
     GraphQlApiModule
   ],
