@@ -5,7 +5,7 @@ import { MongooseModuleOptions, MongooseOptionsFactory } from "@nestjs/mongoose"
 export class MongoDbConfig implements MongooseOptionsFactory {
     createMongooseOptions(): MongooseModuleOptions | Promise<MongooseModuleOptions> {
         return {
-             uri: process.env.REMOTE_DATABASE_URL,
+             uri: process.env.DATABASE_URL,
              useUnifiedTopology: true,
              useNewUrlParser: true,
              useCreateIndex: true,

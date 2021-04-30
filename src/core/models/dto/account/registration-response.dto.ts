@@ -1,4 +1,4 @@
 export abstract class RegistrationResponseDTO {
-    success: boolean;
-    message: string;
+    abstract success: boolean;
+    abstract message: string;
 }

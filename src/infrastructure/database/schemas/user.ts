@@ -1,9 +1,10 @@
 import { SchemaFactory, Schema, Prop } from "@nestjs/mongoose";
 import { Schema as SchemaBase, Types } from "mongoose";
+import { IUser } from "src/core/models/entities/IUser";
 import { DocumentBase } from "src/infrastructure/database/base-classes/document.base";
 
 @Schema({timestamps: true, id: true})
-export class User extends DocumentBase {
+export class User extends DocumentBase implements IUser {
     @Prop({type: String, required: true})
     firstName: string; 
     @Prop({type: String, required: true})

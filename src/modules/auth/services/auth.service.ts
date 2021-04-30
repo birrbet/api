@@ -7,7 +7,6 @@ import {
   REFRESH_TOKEN_EXPIRE_TIME,
   TokenType,
 } from '../constants';
-import LoginResponse from '../graphql/login.response';
 // import RedisService from 'src/infrastructure/redis/redis.service';
 import { NotFoundException } from 'src/core/exceptions/not-found.exception';
 import { AccountService } from 'src/modules/account/account.service';
@@ -25,7 +24,6 @@ export default class AuthService {
   async login(credentials: ICredentials, res) {
     const { username, password } = credentials;
     const user = await this.accountService.findByUsername(username);
-    console.log(password, user);
     if (isEmpty(user)) throw new NotFoundException('Incorrect username or password');
     const isSame: boolean = await this.passwordService.comparePasswords(
       password,

@@ -11,11 +11,11 @@ export abstract class BaseRepository<T extends DocumentBase> implements IBaseRep
     findOne(filter: ObjectLiteral): Promise<T> {
         return this.model.findOne(filter as object).exec();
     }
+    // @TODO refactor for the best implementation
     async pagedResponse(filter: ObjectLiteral, pageQuery: PageQuery): Promise<PaginatedResponse<T>> {
-        const query = this.model.find(filter as object);
-        const totalCount = await query.count().exec();
-        const data = await query.limit(pageQuery.size).skip((pageQuery.pageNumber - 1) * pageQuery.size).exec();
-        return {data, page: {...pageQuery, totalCount, count: pageQuery.size }};
+        const data = await this.model.find(filter as object).limit(pageQuery.size).skip((pageQuery.pageNumber - 1) * pageQuery.size).exec();
+        const totalCount = await this.model.find(filter as object).count().exec();
+        return {data, page: {...pageQuery, totalCount, count: data.length }};
     }
     createOne(entity: Partial<T>): Promise<T> {
         return this.model.create(entity);

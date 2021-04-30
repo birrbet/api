@@ -1,6 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import CreateUserDTO from "src/core/models/dto/account/create-user.dto";
 import { RegistrationResponseDTO } from "src/core/models/dto/account/registration-response.dto";
+import { PageQuery } from "src/core/repository/IBase.repository";
+import { ObjectLiteral } from "src/core/types/object-literal.type";
 import { RoleRepository } from "src/infrastructure/database/repositories/role.repository";
 import { UserRepository } from "src/infrastructure/database/repositories/user.repository";
 import { walletDefault, WalletRepository } from "src/infrastructure/database/repositories/wallet.repository";
@@ -37,7 +39,12 @@ export class AccountService {
         });
         return {success: true, message: "Successfully registered!. Please verify your account" };
     }
-
+    async findAll(filter: ObjectLiteral) {
+        return this.userRepo.findAll(filter);
+    }
+    async findAllPaged(filter: ObjectLiteral, pageQuery: PageQuery) {
+        return this.userRepo.pagedResponse(filter, pageQuery);
+    }
     async findById(id: string) {
         return await this.userRepo.findOne({"_id": id});
     }

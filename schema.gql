@@ -1,0 +1,71 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PageInfo {
+  totalCount: Float
+  count: Float
+  pageNumber: Float
+  size: Float
+}
+
+type RegistrationResponse {
+  success: Boolean!
+  message: String!
+}
+
+type Role {
+  name: String!
+  permissions: [String!]!
+}
+
+type User {
+  firstName: String!
+  lastName: String!
+  age: String!
+  username: String!
+  password: String!
+  role: Role!
+  isActive: Boolean!
+  isLockedOut: Boolean!
+  isVerified: Boolean!
+}
+
+type UserPage {
+  data: [User!]!
+  pageInfo: PageInfo
+}
+
+type Token {
+  token: String!
+  expire: String!
+}
+
+type LoginResponse {
+  user: User!
+  refreshToken: Token!
+  accessToken: Token!
+}
+
+type Query {
+  users(pageNumber: Float!, size: Float!, id: String, username: String): UserPage!
+}
+
+type Mutation {
+  login(input: LoginRequest!): LoginResponse!
+  register(input: RegistrationRequest!): RegistrationResponse!
+}
+
+input LoginRequest {
+  username: String!
+  password: String!
+}
+
+input RegistrationRequest {
+  firstName: String!
+  lastName: String!
+  username: String!
+  password: String!
+  role: String!
+  age: String!
+}

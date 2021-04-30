@@ -5,7 +5,6 @@ import JwtStrategy from './strategies/jwt.strategy';
 import JwtRefreshStrategy from './strategies/jwt-refresh.strategy';
 import { JWT_ACCESS_TOKEN_SERVICE, JWT_REFRESH_TOKEN_SERVICE } from './constants';
 import { JwtService } from '@nestjs/jwt';
-import AuthResolver from './graphql/auth.resolver';
 import { AccountModule } from '../account/account.module';
 
 @Module({
@@ -15,7 +14,6 @@ import { AccountModule } from '../account/account.module';
     TokenService,
     JwtStrategy,
     JwtRefreshStrategy,
-    AuthResolver,
     {
       provide: JWT_ACCESS_TOKEN_SERVICE,
       useFactory: (): JwtService => {
@@ -43,5 +41,6 @@ import { AccountModule } from '../account/account.module';
       },
     },
   ],
+  exports: [AuthService]
 })
 export default class AuthModule {}
