@@ -17,14 +17,14 @@ export default class AuthService {
   constructor(
     private readonly passwordService: PasswordService,
     private readonly tokenService: TokenService,
-    private readonly accountService: AccountService,
-    // private readonly redisService: RedisService
-  ) { }
+    private readonly accountService: AccountService, // private readonly redisService: RedisService
+  ) {}
 
   async login(credentials: ICredentials, res) {
     const { username, password } = credentials;
     const user = await this.accountService.findByUsername(username);
-    if (isEmpty(user)) throw new NotFoundException('Incorrect username or password');
+    if (isEmpty(user))
+      throw new NotFoundException('Incorrect username or password');
     const isSame: boolean = await this.passwordService.comparePasswords(
       password,
       user.password,
@@ -44,7 +44,7 @@ export default class AuthService {
     // is the user verified?
 
     // store the tokens to redis
-/*     this.redisService.setValue(user.id, {
+    /*     this.redisService.setValue(user.id, {
       accessToken,
       refreshToken,
       loginAttempts: 0
@@ -54,22 +54,27 @@ export default class AuthService {
     this.setAuthCookie(TokenType.REFRESH, refreshToken, res);
     return {
       user,
-      accessToken: {token: accessToken, expire: ACCESS_TOKEN_EXPIRE_TIME / 1000 },
-      refreshToken: { token: refreshToken, expire: REFRESH_TOKEN_EXPIRE_TIME / 1000 }
-    }
+      accessToken: {
+        token: accessToken,
+        expire: ACCESS_TOKEN_EXPIRE_TIME / 1000,
+      },
+      refreshToken: {
+        token: refreshToken,
+        expire: REFRESH_TOKEN_EXPIRE_TIME / 1000,
+      },
+    };
   }
-
 
   private setAuthCookie(tokenType: TokenType, token: string, response) {
     if (tokenType === TokenType.ACCESS) {
       return response.cookie('x-access', token, {
         httpOnly: true,
-        expire:  ACCESS_TOKEN_EXPIRE_TIME / 1000,
-      })
+        expire: ACCESS_TOKEN_EXPIRE_TIME / 1000,
+      });
     }
     return response.cookie('x-refresh', token, {
       httpOnly: true,
-      expire: REFRESH_TOKEN_EXPIRE_TIME / 1000
-    })
+      expire: REFRESH_TOKEN_EXPIRE_TIME / 1000,
+    });
   }
 }

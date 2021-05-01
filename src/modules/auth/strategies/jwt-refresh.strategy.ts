@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-import {get} from 'lodash';
+import { get } from 'lodash';
 import { AccountService } from 'src/modules/account/account.service';
 @Injectable()
 export default class JwtRefreshStrategy extends PassportStrategy(
@@ -21,6 +21,9 @@ export default class JwtRefreshStrategy extends PassportStrategy(
 
   async validate(request, payload) {
     const refreshToken = request.cookies?.Refresh;
-    return this.userService.getUserIfRefreshTokenMatches(refreshToken, payload.sub);
+    return this.userService.getUserIfRefreshTokenMatches(
+      refreshToken,
+      payload.sub,
+    );
   }
 }

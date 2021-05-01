@@ -15,7 +15,7 @@ async function bootstrap() {
   app.use(cookieParser());
   const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
   app.useLogger(logger);
-  app.useGlobalInterceptors(new ExceptionInterceptor(logger))
+  app.useGlobalInterceptors(new ExceptionInterceptor(logger));
   await app.listen(process.env.GRAPHQL_PORT);
 }
 bootstrap();

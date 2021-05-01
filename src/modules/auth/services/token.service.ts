@@ -17,7 +17,7 @@ export default class TokenService {
 
   // @TODO store the token
   generateToken(tokenType: TokenType, userId: string) {
-    if(!userId) return;
+    if (!userId) return;
     if (TokenType.ACCESS) return this.accessTokenService.sign(userId);
     return this.refreshTokenService.sign(userId);
   }
