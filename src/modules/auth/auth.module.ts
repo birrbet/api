@@ -46,6 +46,6 @@ import RedisModule from 'src/infrastructure/redis/redis.module';
       inject: [ConfigService]
     },
   ],
-  exports: [AuthService, TokenService]
+  exports: [AuthService, TokenService, PhoneService]
 })
 export default class AuthModule {}

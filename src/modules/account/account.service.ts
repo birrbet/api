@@ -6,6 +6,7 @@ import { ObjectLiteral } from "src/core/types/object-literal.type";
 import { RoleRepository } from "src/infrastructure/database/repositories/role.repository";
 import { UserRepository } from "src/infrastructure/database/repositories/user.repository";
 import { walletDefault, WalletRepository } from "src/infrastructure/database/repositories/wallet.repository";
+import PhoneService from "../auth/verification/phone/phone.service";
 import PasswordService from "./password.service";
 
 @Injectable()
@@ -15,10 +16,11 @@ export class AccountService {
         private readonly userRepo: UserRepository,
         private readonly roleRepo: RoleRepository,
         private readonly walletRepo: WalletRepository,
-        private readonly passwordService: PasswordService) {}
+        private readonly passwordService: PasswordService,
+        private readonly phoneVerificationService: PhoneService) {}
     // register [x]
-    // verify []
-    // sendVerification []
+    // verify [x]
+    // sendVerification [x]
     // requestPasswordReset []
     // changePassword []
     // findByUsername [x]
@@ -37,6 +39,7 @@ export class AccountService {
             ...walletDefault,
             user: newUser._id,
         });
+        // assume user registered using his phone number
         return {success: true, message: "Successfully registered!. Please verify your account" };
     }
     async findAll(filter: ObjectLiteral) {

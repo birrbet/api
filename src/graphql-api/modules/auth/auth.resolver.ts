@@ -3,17 +3,20 @@ import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
 import { TokenType } from "src/modules/auth/constants";
 import AuthService from "src/modules/auth/services/auth.service";
 import TokenService from "src/modules/auth/services/token.service";
+import PhoneService from "src/modules/auth/verification/phone/phone.service";
 import { User } from "../account/user";
 import { CurrentUser } from "../user.decorator";
 import { LoginRequest } from "./login-request.dto";
 import LoginResponse from "./login-response.dto";
+import { PhoneCodeVerification, PhoneVerification, PhoneVerificationResponse } from "./phone-verification";
 import { RefreshAuthGuard } from "./refresh-auth.guard";
 
 @Resolver()
 export class AuthResolver {
     constructor(
       private readonly authService: AuthService,
-      private readonly tokenService: TokenService) { }
+      private readonly tokenService: TokenService,
+      private readonly phoneService: PhoneService) { }
 
     @Mutation(() => LoginResponse)
     login(
@@ -54,5 +57,20 @@ export class AuthResolver {
       })
   
       return true
+    }
+
+    @Mutation(() => PhoneVerificationResponse)
+    handleCodePhoneVerification(
+      @Args('phoneCodeVerificationInput')
+      phoneCodeVerification: PhoneCodeVerification,
+    ) {
+      return this.phoneService.handleCodeVerification(phoneCodeVerification);
+    }
+    @Mutation(() => PhoneVerificationResponse)
+    handleSendPhoneVerificationCode(
+      @Args('phoneVerification')
+      phoneVerification: PhoneVerification,
+    ) {
+      return this.phoneService.handleSendVerification(phoneVerification);
     }
 }

@@ -1,12 +1,10 @@
 import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
-import PhoneVerificationDTO, {
-  PhoneCodeVerificationDTO,
-} from './phone-verification.dto';
 import { google } from 'googleapis';
 import PhoneVerification from './phone-verification';
 import { ConfigService } from '@nestjs/config';
 import RedisService from 'src/infrastructure/redis/redis.service';
 import { AccountService } from 'src/modules/account/account.service';
+import { IPhoneCodeVerification, IPhoneVerification } from 'src/core/models/dto/auth/phone-verification';
 @Injectable()
 export default class PhoneService {
   constructor(
@@ -19,7 +17,7 @@ export default class PhoneService {
   }
 
   async handleCodeVerification(
-    phoneCodeVerification: PhoneCodeVerificationDTO,
+    phoneCodeVerification: IPhoneCodeVerification,
   ) {
     const { phoneNumber, code } = phoneCodeVerification;
     let verificationDoc = await this.redisService.getValue(phoneNumber);
@@ -49,7 +47,7 @@ export default class PhoneService {
     );
     return verification;
   }
-  async handleSendVerification(phoneVerification: PhoneVerificationDTO) {
+  async handleSendVerification(phoneVerification: IPhoneVerification) {
     const existingDoc = await this.redisService.getValue(
       phoneVerification.phoneNumber,
     );
@@ -88,7 +86,7 @@ export default class PhoneService {
     this.redisService.setValue(phoneVerification.phoneNumber, pV.toJson());
     return pV.toJson();
   }
-  private async sendVerificationSMS(phoneVerification: PhoneVerificationDTO) {
+  private async sendVerificationSMS(phoneVerification: IPhoneVerification) {
     try {
       const response = await google
         .identitytoolkit({
