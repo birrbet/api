@@ -5,8 +5,10 @@ import { GraphQlApiModule } from 'src/graphql-api/graphql-api.module';
 import { MongoDbConfig } from 'src/infrastructure/configs/mongodb.config';
 import { WinstonConfig } from 'src/infrastructure/configs/winston.config';
 import { RabbitMqModule } from 'src/infrastructure/rabbit-mq/rabbit-md.module';
+import { ConfigModule } from "@nestjs/config";
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     MongooseModule.forRootAsync({
       useClass: MongoDbConfig,
     }),

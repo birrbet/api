@@ -53,6 +53,8 @@ type Query {
 
 type Mutation {
   login(input: LoginRequest!): LoginResponse!
+  refreshToken: User!
+  logout: Boolean!
   register(input: RegistrationRequest!): RegistrationResponse!
 }
 
