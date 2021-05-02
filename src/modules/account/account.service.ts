@@ -19,7 +19,6 @@ export class AccountService {
     private readonly roleRepo: RoleRepository,
     private readonly walletRepo: WalletRepository,
     private readonly passwordService: PasswordService,
-    private readonly phoneVerificationService: PhoneService,
   ) {}
   // register [x]
   // verify [x]

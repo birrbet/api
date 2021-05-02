@@ -16,6 +16,7 @@ type RegistrationResponse {
 
 type Role {
   name: String!
+  normalizedName: String!
   permissions: [String!]!
 }
 
@@ -47,6 +48,11 @@ type LoginResponse {
   accessToken: Token!
 }
 
+type PhoneVerificationResponse {
+  status: Float!
+  statusText: String!
+}
+
 type Query {
   users(pageNumber: Float!, size: Float!, id: String, username: String): UserPage!
 }
@@ -55,12 +61,24 @@ type Mutation {
   login(input: LoginRequest!): LoginResponse!
   refreshToken: User!
   logout: Boolean!
+  handleCodePhoneVerification(phoneCodeVerificationInput: PhoneCodeVerification!): PhoneVerificationResponse!
+  handleSendPhoneVerificationCode(phoneVerification: PhoneVerification!): PhoneVerificationResponse!
   register(input: RegistrationRequest!): RegistrationResponse!
 }
 
 input LoginRequest {
   username: String!
   password: String!
+}
+
+input PhoneCodeVerification {
+  phoneNumber: String!
+  code: String!
+}
+
+input PhoneVerification {
+  phoneNumber: String!
+  reCaptchaToken: String!
 }
 
 input RegistrationRequest {
