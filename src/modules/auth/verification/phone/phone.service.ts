@@ -4,21 +4,19 @@ import PhoneVerification from './phone-verification';
 import { ConfigService } from '@nestjs/config';
 import RedisService from 'src/infrastructure/redis/redis.service';
 import { AccountService } from 'src/modules/account/account.service';
-import { IPhoneCodeVerification, IPhoneVerification } from 'src/core/models/dto/auth/phone-verification';
+import {
+  IPhoneCodeVerification,
+  IPhoneVerification,
+} from 'src/core/models/dto/auth/phone-verification';
 @Injectable()
 export default class PhoneService {
   constructor(
     private readonly redisService: RedisService,
     private readonly configService: ConfigService,
-    private readonly accountService: AccountService
+    private readonly accountService: AccountService,
   ) {}
-  sendNotification(to: string, details?: { message: string }): boolean {
-    return false;
-  }
 
-  async handleCodeVerification(
-    phoneCodeVerification: IPhoneCodeVerification,
-  ) {
+  async handleCodeVerification(phoneCodeVerification: IPhoneCodeVerification) {
     const { phoneNumber, code } = phoneCodeVerification;
     let verificationDoc = await this.redisService.getValue(phoneNumber);
     if (!verificationDoc) {

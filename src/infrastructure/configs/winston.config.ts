@@ -36,3 +36,4 @@ export class WinstonConfig implements WinstonModuleOptionsFactory {
         }
     }
 }
+
