@@ -54,3 +54,35 @@ export class Ticket extends DocumentBase implements ITicket {
 export const TicketSchema = SchemaFactory.createForClass(Ticket);
 // method isExpired: boolean;
 // method generateUniqueId
+function randomChar() {
+  return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.charAt(Math.floor(Math.random() * 26));
+}
+
+function randomSixDigitNumber() {
+  const minm = 100000;
+  const maxm = 999999;
+  return Math.floor(Math.random() * (maxm - minm + 1)) + minm;
+}
+export const generateUniqueId = () => {
+    return `${randomChar()}${randomSixDigitNumber()}`;
+}
+function setTicketId() {
+  try {
+    this.ticketId = generateUniqueId();
+    this.save();
+  } catch(err) {
+    // assume the error is not unique
+    setTicketId();
+  }
+}
+
+function setPlacementId() {
+  try{
+    this.placementId = generateUniqueId();
+    this.save();
+  } catch(err){
+    setPlacementId();
+  }
+}
+TicketSchema.method("setTicketId", setTicketId);
+TicketSchema.method("setPlacementId", setPlacementId);
