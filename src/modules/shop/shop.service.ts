@@ -9,10 +9,14 @@ export class ShopService {
     // getShopReport
     // getReport for individual cashier
 
-    assignAdmin() {}
-    addCashier() {}
-    blockCashierAccount() {}
-    updateAddress() {}
-    getCashierReport() {}
-    getReportForCashier() {}
+    assignAdmin(shopId, adminId) {
+
+    }
+    addCashier(shopId, cashier) {
+
+    }
+    blockCashierAccount(shopId, cashier) {}
+    updateAddress(shopId, address) {}
+    getShopReport(shopId) {}
+    getReportForCashier(cashier) {}
 }

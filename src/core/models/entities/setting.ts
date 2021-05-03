@@ -4,15 +4,19 @@ export interface I_SEO {
   homePageTitle: string;
   homePageMetaDescription: string;
 }
-
+export interface ICurrency {
+  name: string;
+  code: string;
+}
 export interface IGeneralSetting {
+  appId: string;
   name: string;
   logo: string;
   favicon: string;
   themeName: string;
   socialLinks: string[];
   defaultCurrency: string;
-  currencies: [];
+  currencies: ICurrency[];
   searchEngineOpt: I_SEO[];
 }
 export interface ITaxSetting {
