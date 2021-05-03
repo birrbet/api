@@ -1,10 +1,10 @@
-export interface I_SEO {
+export class SEO {
   defaultPageTitle: string;
   defaultMetaDescription: string;
   homePageTitle: string;
   homePageMetaDescription: string;
 }
-export interface ICurrency {
+export class Currency {
   name: string;
   code: string;
 }
@@ -16,8 +16,8 @@ export interface IGeneralSetting {
   themeName: string;
   socialLinks: string[];
   defaultCurrency: string;
-  currencies: ICurrency[];
-  searchEngineOpt: I_SEO[];
+  currencies: Currency[];
+  searchEngineOpt: SEO;
 }
 export interface ITaxSetting {
   vat: number; // in percent, so it should be between 0 and 1
