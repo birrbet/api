@@ -88,6 +88,3 @@ function setPlacementId() {
 
 TicketSchema.method("setTicketId", setTicketId);
 TicketSchema.method("setPlacementId", setPlacementId);
-TicketSchema.method("getTotalOdds", function(){
-  return this.bets.map((bet) => bet.get('oddValue')).reduce((pr, cr) => pr + cr, 0)
-})
