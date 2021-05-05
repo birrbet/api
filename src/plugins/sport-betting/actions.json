@@ -1,0 +1,9 @@
+{
+    "actions": [
+        "update sports",
+        "update country",
+        "update league",
+        "update market",
+        "update fixtures"
+    ]
+}

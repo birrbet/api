@@ -46,7 +46,7 @@ export enum ScoreboardStatus {
     'About_to_start' = 9,
 }
 
-export enum BetSettlement {
+export enum OddSettlement {
     'Cancelled' = -1,
     'Loser' = 1,
     'Winner' = 2,
@@ -56,7 +56,7 @@ export enum BetSettlement {
 }
 
 registerEnumType(ScoreboardStatus, {name: "ScoreboardStatus"});
-registerEnumType(BetSettlement, {name: "BetSettlement"});
+registerEnumType(OddSettlement, {name: "OddSettlement"});
 
 
 
@@ -102,7 +102,6 @@ export class Fixture extends Base implements ILockable, IOrderable {
     @Field(() => Sport, {nullable: true})
     @Prop({type: String})
     country: string | Country;
-
 
     // should it sub-document?
     @Field(() => [Participant])
