@@ -9,4 +9,9 @@ export class UserRepository extends BaseRepository<User> {
   constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {
     super(userModel);
   }
+  findOneWithRole(id) {
+    return this.userModel.findOne({_id: id})
+    .populate('role')
+    .populate('permissions');
+  }
 }

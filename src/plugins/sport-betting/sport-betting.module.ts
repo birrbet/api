@@ -1,11 +1,14 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
+import { InPlayController } from "./in-play.controller";
+import { PreMatchController } from "./pre-match.controller";
 import { IN_PLAY_QUEUE, PRE_MATCH_QUEUE, rabbitMqFactory } from "./rabbitmq.config";
 
 // connect with rabbit mq
 // get messages store it to database
 // publish it to graphql sql subscriptions
 @Module({
+    controllers: [PreMatchController, InPlayController],
     imports: [ConfigModule],
     providers: [
         {

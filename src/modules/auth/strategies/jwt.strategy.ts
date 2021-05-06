@@ -16,6 +16,6 @@ export default class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
   async validate(payload: any) {
-    return await this.accountService.findById(payload.sub);
+    return await this.accountService.findOneWithRole(payload.sub);
   }
 }

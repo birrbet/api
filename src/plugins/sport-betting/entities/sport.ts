@@ -1,10 +1,9 @@
 import { Field } from "@nestjs/graphql";
 import { SchemaFactory, Schema, Prop } from "@nestjs/mongoose";
-import { Document } from "mongoose";
 import { Base } from "./common/base";
 import { ILockable } from "./common/lockable";
 import { IOrderable } from "./common/orderable";
-import { Country, CountrySchema } from "./country";
+import { Country } from "./country";
 import { Schema as SchemaBase } from "mongoose";
 
 @Schema({timestamps: true})

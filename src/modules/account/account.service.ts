@@ -40,7 +40,7 @@ export class AccountService {
     });
     // @todo which role needs wallet account
     // assume we are registering customer
-    const userWallet = await this.walletRepo.createOne({
+    await this.walletRepo.createOne({
       ...walletDefault,
       user: newUser._id,
     });
@@ -60,6 +60,10 @@ export class AccountService {
     return await this.userRepo.findOne({ _id: id });
   }
 
+  
+  async findOneWithRole(id) {
+    return await this.userRepo.findOneWithRole(id);
+  } 
   async findByUsername(username: string) {
     return await this.userRepo.findOne({ username });
   }

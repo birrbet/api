@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import { ObjectLiteral } from "src/core/types/object-literal.type";
 import { BaseRepository } from "src/infrastructure/database/repositories/base.repository";
 import { Country, Fixture, League, Market, Sport, Ticket } from "../entities";
 
@@ -8,6 +9,15 @@ import { Country, Fixture, League, Market, Sport, Ticket } from "../entities";
 export class SportRepository extends BaseRepository<Sport> {
     constructor(@InjectModel(Sport.name) private readonly sportModel: Model<Sport>) {
         super(sportModel);
+    }
+    
+    findOne(filter: ObjectLiteral) {
+        return this.sportModel
+        .findOne(filter)
+        .populate('countries')
+        .populate('leagues', [], League.name, {isLocked: false, /** write a match for finding not expired fixtures > 0 */})
+        // .select()
+        .exec();
     }
 }
 @Injectable()

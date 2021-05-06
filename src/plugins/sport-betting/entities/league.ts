@@ -5,6 +5,7 @@ import { ILockable } from "./common/lockable";
 import { IOrderable } from "./common/orderable";
 import { Country } from "./country";
 import { Schema as SchemaBase } from "mongoose";
+import { Fixture } from "./fixture";
 
 @ObjectType()
 @Schema({timestamps: true})
@@ -34,6 +35,10 @@ export class League extends Base implements ILockable, IOrderable {
     @Field(() => Country)
     @Prop({type: SchemaBase.Types.ObjectId, ref: 'countries', required: true})
     country: string | Country;
+
+    @Field(() => [Fixture])
+    @Prop({type: [SchemaBase.Types.ObjectId], ref: 'fixtures', default: []})
+    fixtures: string[] | Fixture[];
 }
 
 

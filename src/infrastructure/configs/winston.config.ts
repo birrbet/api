@@ -31,7 +31,7 @@ export class WinstonConfig implements WinstonModuleOptionsFactory {
                 new RabbitWinstonTransport(this.rabbitMqService, undefined, {
                     level: 'info'
                 }),
-                ...['info', 'error'].map(level => consoleTransportFactory(level))
+               // ...['info', 'error'].map(level => consoleTransportFactory(level))
             ]
         }
     }

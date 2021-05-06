@@ -1,0 +1,17 @@
+{
+    "actions": [
+        "update permissions",
+        "update list of roles",
+        "create new role",
+        "view installed packages",
+        "install a new package",
+        "create new shop",
+        "view shops",
+        "view shop details",
+        "assign shop admin",
+        "add cashier to a shop",
+        "remove/block cashier form shop",
+        "create new user by role",
+        "change users role"
+    ]
+}

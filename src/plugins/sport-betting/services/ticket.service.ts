@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { TicketStatus } from "src/core/models/entities/ticket";
-import { TicketRepository } from "src/infrastructure/database/repositories/ticket.repository";
-import { PlacementRule } from "./placement.rule";
+import { TicketStatus } from "../entities";
+import { TicketRepository } from "../repositories";
 
 @Injectable()
 export class TicketService {
@@ -22,10 +21,10 @@ export class TicketService {
     // @Todo
     bookTicket() {}
     placeTicket(user, ticket) {
-        const rule = new PlacementRule();
+/*         const rule = new PlacementRule();
         if (rule.isApplicable({user, ticket})) {
             // place the ticket
-        }
+        } */
     }
     findSavedTicket(ticketId: string) {
         return this.ticketRepo.findOne({ticketId});
