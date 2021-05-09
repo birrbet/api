@@ -11,6 +11,7 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot(),
     MongooseModule.forRootAsync({
       useClass: MongoDbConfig,
+      imports: [ConfigModule]
     }),
     WinstonModule.forRootAsync({
       useClass: WinstonConfig,
@@ -19,4 +20,4 @@ import { ConfigModule } from '@nestjs/config';
     GraphQlApiModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
