@@ -5,13 +5,15 @@ import { ExceptionInterceptor } from './infrastructure/interceptors/exception.in
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as cookieParser from 'cookie-parser';
+import { NestExpressApplication } from '@nestjs/platform-express';
 // import * as rateLimit from 'express-rate-limit';
 require('dotenv').config();
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.disable('x-powered-by');
   app.enableCors();
   app.use(compression());
- // app.use(helmet());
+  // app.use(helmet());
   app.use(cookieParser());
   const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
   app.useLogger(logger);
