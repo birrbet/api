@@ -6,8 +6,8 @@ import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as cookieParser from 'cookie-parser';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { ConfigService } from '@nestjs/config';
 // import * as rateLimit from 'express-rate-limit';
-require('dotenv').config();
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.disable('x-powered-by');
@@ -17,7 +17,8 @@ async function bootstrap() {
   app.use(cookieParser());
   const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
   app.useLogger(logger);
+  const configService = app.get<ConfigService>(ConfigService);
   app.useGlobalInterceptors(new ExceptionInterceptor(logger));
-  await app.listen(process.env.GRAPHQL_PORT);
+  await app.listen(configService.get("GRAPHQL_PORT"));
 }
 bootstrap();
