@@ -89,3 +89,7 @@ input RegistrationRequest {
   role: String!
   age: String!
 }
+
+type Subscription {
+  serverTime: String!
+}

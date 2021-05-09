@@ -18,8 +18,8 @@ services:
     volumes:
         - ./data:/data/db
     ports:
-        - 127.0.0.1:27017:27017
+        - 127.0.0.1:27018:27017
   redis:
     image: "redis:alpine"
     ports:
-        - "6379:6379"
+        - 127.0.0.1:6378:6379
