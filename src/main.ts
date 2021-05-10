@@ -19,6 +19,6 @@ async function bootstrap() {
   app.useLogger(logger);
   const configService = app.get<ConfigService>(ConfigService);
   app.useGlobalInterceptors(new ExceptionInterceptor(logger));
-  await app.listen(configService.get("GRAPHQL_PORT"));
+  await app.listen(configService.get('GRAPHQL_PORT'));
 }
 bootstrap();

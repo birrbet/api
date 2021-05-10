@@ -1,3 +1,3 @@
 export interface ILockable {
-    isLocked: boolean;
+  isLocked: boolean;
 }

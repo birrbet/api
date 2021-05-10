@@ -60,10 +60,9 @@ export class AccountService {
     return await this.userRepo.findOne({ _id: id });
   }
 
-  
   async findOneWithRole(id) {
     return await this.userRepo.findOneWithRole(id);
-  } 
+  }
   async findByUsername(username: string) {
     return await this.userRepo.findOne({ username });
   }

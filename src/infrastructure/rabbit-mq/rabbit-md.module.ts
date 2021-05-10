@@ -12,7 +12,7 @@ const LOG_QUEUE = 'LOG_QUEUE';
 //@TODO use @nestjs/config
 @Injectable()
 export class RabbitMqService {
-  constructor(@Inject(LOG_QUEUE) private logService: ClientProxy) { }
+  constructor(@Inject(LOG_QUEUE) private logService: ClientProxy) {}
   publish(message) {
     return this.logService
       .send(
@@ -31,10 +31,10 @@ export class RabbitMqService {
     {
       provide: LOG_QUEUE,
       useFactory: (configservice: ConfigService) => {
-        const user = configservice.get<string>("RABBITMQ_USER");
-        const pass = configservice.get<string>("RABBITMQ_PASSWORD");
-        const host = configservice.get<string>("RABBITMQ_HOST");
-        const port = configservice.get<string>("RABBITMQ_PORT");
+        const user = configservice.get<string>('RABBITMQ_USER');
+        const pass = configservice.get<string>('RABBITMQ_PASSWORD');
+        const host = configservice.get<string>('RABBITMQ_HOST');
+        const port = configservice.get<string>('RABBITMQ_PORT');
         return ClientProxyFactory.create({
           transport: Transport.RMQ,
           options: {
@@ -46,10 +46,10 @@ export class RabbitMqService {
           },
         });
       },
-      inject: [ConfigService]
+      inject: [ConfigService],
     },
     RabbitMqService,
   ],
   exports: [RabbitMqService],
 })
-export class RabbitMqModule { }
+export class RabbitMqModule {}

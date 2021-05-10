@@ -1,12 +1,12 @@
-import { Prop } from "@nestjs/mongoose";
+import { Prop } from '@nestjs/mongoose';
 // services
 // url
 
 export class Package {
-    @Prop({type: String, required: String})
-    name: string;
+  @Prop({ type: String, required: String })
+  name: string;
 
-    configs: string;
+  configs: string;
 
-    permissions: string;
+  permissions: string;
 }

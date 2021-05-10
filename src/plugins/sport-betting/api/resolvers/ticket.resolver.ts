@@ -1,7 +1,5 @@
-import { Resolver } from "@nestjs/graphql";
-import { Ticket } from "../../entities";
+import { Resolver } from '@nestjs/graphql';
+import { Ticket } from '../../entities';
 
 @Resolver(() => Ticket)
-export class TicketResolver {
-    
-}
+export class TicketResolver {}

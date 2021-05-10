@@ -10,8 +10,9 @@ export class UserRepository extends BaseRepository<User> {
     super(userModel);
   }
   findOneWithRole(id) {
-    return this.userModel.findOne({_id: id})
-    .populate('role')
-    .populate('permissions');
+    return this.userModel
+      .findOne({ _id: id })
+      .populate('role')
+      .populate('permissions');
   }
 }

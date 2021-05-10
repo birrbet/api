@@ -1,3 +1,3 @@
 export interface IOrderable {
-    order: number;
+  order: number;
 }

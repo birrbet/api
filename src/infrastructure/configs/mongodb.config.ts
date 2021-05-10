@@ -7,12 +7,12 @@ import {
 
 @Injectable()
 export class MongoDbConfig implements MongooseOptionsFactory {
-  constructor(private readonly configservice: ConfigService) { }
+  constructor(private readonly configservice: ConfigService) {}
   createMongooseOptions():
     | MongooseModuleOptions
     | Promise<MongooseModuleOptions> {
     return {
-      uri: this.configservice.get<string>("DATABASE_URL"),
+      uri: this.configservice.get<string>('DATABASE_URL'),
       useUnifiedTopology: true,
       useNewUrlParser: true,
       useCreateIndex: true,

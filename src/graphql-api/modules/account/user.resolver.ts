@@ -16,8 +16,8 @@ export class UserResolver {
   @Query(() => UserPage)
   @UseGuards(new GqlPermissionGuard(['view users']))
   async users(@Args() userFilter: UserFilter, @Args() pageQuery: PageArg) {
-    const {id, username} = userFilter; 
-    const filter = {id, username};
+    const { id, username } = userFilter;
+    const filter = { id, username };
     const { data, page } = await this.accountService.findAllPaged(
       filter,
       pageQuery,

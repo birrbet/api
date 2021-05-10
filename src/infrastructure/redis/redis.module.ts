@@ -10,18 +10,18 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     {
       provide: 'REDIS_CLIENT',
       useFactory: (configService: ConfigService) => {
-        const port = configService.get<number>("REDIS_HOST");
-        const host = configService.get<string>("REDIS_PORT");
+        const port = configService.get<number>('REDIS_HOST');
+        const host = configService.get<string>('REDIS_PORT');
         const client = redis.createClient({
           host,
-          port
+          port,
         });
         client.on('error', (err) => {
           console.log('Redis unable to connect!', err);
         });
         return client;
       },
-      inject: [ConfigService]
+      inject: [ConfigService],
     },
   ],
   exports: [RedisService],
