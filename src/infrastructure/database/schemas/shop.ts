@@ -6,7 +6,18 @@ import {
   ShopType,
 } from 'src/core/models/entities/shop';
 import { DocumentBase } from '../base-classes/document.base';
-import { Schema as SchemaBase } from 'mongoose';
+import { Model, Schema as SchemaBase } from 'mongoose';
+
+@Schema({_id: false, timestamps: true})
+export class Cashier {
+  @Prop({type: SchemaBase.Types.ObjectId, ref: 'users', required: true, unique: true})
+  user: string;
+  @Prop({ type: Boolean, default: false })
+  isLocked: boolean;
+}
+const CashierSchema = SchemaFactory.createForClass(Cashier);
+
+
 @Schema({ timestamps: true, id: true })
 export class Shop extends DocumentBase implements IShop {
   @Prop({ type: String, required: true })
@@ -15,6 +26,10 @@ export class Shop extends DocumentBase implements IShop {
   isActive: boolean;
   @Prop({ type: SchemaBase.Types.ObjectId })
   admin: string;
+
+  @Prop({ type: [CashierSchema], default: [] })
+  cashiers: Array<Cashier>;
+
   @Prop({
     type: String,
     enum: ShopType,

@@ -13,7 +13,7 @@ export class Contact {
 export interface IShop {
     branchName: string;
     isActive: boolean
-    admin: string;
+    admin: string | any;
     type: ShopType;
     contacts: Contact[];
     location: Location

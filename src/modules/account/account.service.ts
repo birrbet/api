@@ -9,6 +9,7 @@ import {
   walletDefault,
   WalletRepository,
 } from 'src/infrastructure/database/repositories/wallet.repository';
+import RedisService from 'src/infrastructure/redis/redis.service';
 import PhoneService from '../auth/verification/phone/phone.service';
 import PasswordService from './password.service';
 
@@ -19,6 +20,7 @@ export class AccountService {
     private readonly roleRepo: RoleRepository,
     private readonly walletRepo: WalletRepository,
     private readonly passwordService: PasswordService,
+    private readonly redisService: RedisService
   ) {}
   // register [x]
   // verify [x]
@@ -82,9 +84,14 @@ export class AccountService {
     return wallet;
   }
   //
-  getUserIfRefreshTokenMatches(refreshToken: string, userId: string) {
-    // hash the refresh token and compare with the hashed value stored
-    // if matched return user
+  async getUserIfRefreshTokenMatches(refreshToken: string, userId: string) {
+    const user = await this.redisService.getValue(userId);
+    if (user) {
+      if (user.refreshToken === refreshToken) {
+        return await this.findById(userId);
+      }
+      return;
+    }
     return;
   }
 }
